@@ -86,7 +86,10 @@ let food = new Food(); // Create an instance of the foodfunction gameLoop() {
     snake.draw();
 
     // Draw the food
-    food.draw();
+    food.draw() {
+    const svgElement = document.getElementById('food-svg').cloneNode(true);
+    context.drawImage(svgElement, this.x, this.y, this.size, this.size);
+}
 
     // Update and draw enemies
     for (let enemy of enemies) {
