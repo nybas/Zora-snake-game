@@ -28,3 +28,74 @@ class Snake {
 }
 
 const snake = new Snake(); // Create an instance of the snake
+function gameLoop() {
+    context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+
+    // Update and draw the snake
+    snake.move();
+    snake.draw();
+
+    // Update and draw enemies
+    for (let enemy of enemies) {
+        enemy.move();
+        enemy.draw();
+    }
+
+    // Draw obstacles
+    for (let obstacle of obstacles) {
+        obstacle.draw();
+    }
+
+    requestAnimationFrame(gameLoop); // Request the next frame
+}
+document.addEventListener('keydown', (event) => {
+    switch (event.key) {
+        case 'ArrowUp':
+            snake.changeDirection({ x: 0, y: -snake.size });
+            break;
+        case 'ArrowDown':
+            snake.changeDirection({ x: 0, y: snake.size });
+            break;
+        case 'ArrowLeft':
+            snake.changeDirection({ x: -snake.size, y: 0 });
+            break;
+        case 'ArrowRight':
+            snake.changeDirection({ x: snake.size, y: 0 });
+            break;
+    }
+});class Food {
+    constructor() {
+        this.x = Math.floor(Math.random() * (canvas.width / 20)) * 20; // Random x position
+        this.y = Math.floor(Math.random() * (canvas.height / 20)) * 20; // Random y position
+        this.size = 20; // Size of the food
+    }
+
+    draw() {
+        context.fillStyle = 'yellow'; // Color of the food
+        context.fillRect(this.x, this.y, this.size, this.size);
+    }
+}
+
+let food = new Food(); // Create an instance of the foodfunction gameLoop() {
+    context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+
+    // Update and draw the snake
+    snake.move();
+    snake.draw();
+
+    // Draw the food
+    food.draw();
+
+    // Update and draw enemies
+    for (let enemy of enemies) {
+        enemy.move();
+        enemy.draw();
+    }
+
+    // Draw obstacles
+    for (let obstacle of obstacles) {
+        obstacle.draw();
+    }
+
+    requestAnimationFrame(gameLoop); // Request the next frame
+}
