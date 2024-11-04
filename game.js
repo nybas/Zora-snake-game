@@ -20,11 +20,13 @@ class Snake {
     }
 
     draw() {
-        context.fillStyle = 'green'; // Color of the snake
-        for (let segment of this.body) {
-            context.fillRect(segment.x, segment.y, this.size, this.size); // Draw each segment
-        }
+    const svgElement = document.getElementById('snake-svg').cloneNode(true);
+    const size = this.size;
+
+    for (let segment of this.body) {
+        context.drawImage(svgElement, segment.x, segment.y, size, size);
     }
+}
 }
 
 const snake = new Snake(); // Create an instance of the snake
